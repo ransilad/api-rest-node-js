@@ -24,25 +24,25 @@ var TestCtrl = require('./controllers/tests');
 var api = express.Router();
 
 api.route('/tvshows')  
-  .get(TVShowCtrl.findAllTVShows)
-  .post(TVShowCtrl.addTVShow);
+	.get(TVShowCtrl.findAllTVShows)
+	.post(TVShowCtrl.addTVShow);
 
 api.route('/tvshows/:id')  
-  .get(TVShowCtrl.findById)
-  .put(TVShowCtrl.updateTVShow)
-  .delete(TVShowCtrl.deleteTVShow);
+	.get(TVShowCtrl.findById)
+	.put(TVShowCtrl.updateTVShow)
+	.delete(TVShowCtrl.deleteTVShow);
 
 api.route('/tests')  
-  .get(TestCtrl.findAllTest)
-  .post(TestCtrl.addTest);
+	.get(TestCtrl.findAllTest)
+	.post(TestCtrl.addTest);
 
 api.route('/test/:id')  
-  .get(TestCtrl.findById)
-  .put(TestCtrl.updateTest)
-  .delete(TestCtrl.deleteTest);
+	.get(TestCtrl.findById)
+	.put(TestCtrl.updateTest)
+	.delete(TestCtrl.deleteTest);
 
 app.use('/api', api);
 
 app.listen(3000, function() {
-console.log("Node server running on http://localhost:3000");
+	console.log("Node server running on http://localhost:3000");
 });
