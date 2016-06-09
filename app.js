@@ -14,22 +14,33 @@ mongoose.connect('mongodb://MacBook-Gerson.local:27017/tvshow', function(err, re
 	}
 });
 require("./models/tvshow");
+require("./models/test");
 
 var TVShowCtrl = require('./controllers/tvshows');
+var TestCtrl = require('./controllers/tests');
 
 // API routes
-var tvshows = express.Router();
+var api = express.Router();
 
-tvshows.route('/tvshows')  
+api.route('/tvshows')  
   .get(TVShowCtrl.findAllTVShows)
   .post(TVShowCtrl.addTVShow);
 
-tvshows.route('/tvshows/:id')  
+api.route('/tvshows/:id')  
   .get(TVShowCtrl.findById)
   .put(TVShowCtrl.updateTVShow)
   .delete(TVShowCtrl.deleteTVShow);
 
-app.use('/api', tvshows);
+api.route('/tests')  
+  .get(TestCtrl.findAllTest)
+  .post(TestCtrl.addTest);
+
+api.route('/test/:id')  
+  .get(TestCtrl.findById)
+  .put(TestCtrl.updateTest)
+  .delete(TestCtrl.deleteTest);
+
+app.use('/api', api);
 
 app.listen(3000, function() {
 console.log("Node server running on http://localhost:3000");
