@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());  
 app.use(methodOverride());
 
-mongoose.connect('mongodb://MacBook-Gerson.local:27017/tvshow', function(err, res) {  
+mongoose.connect('mongodb://localhost:27017/tvshow', function(err, res) {  
 	if(err) {
 		console.log('ERROR: connecting to Database. ' + err);
 	}
