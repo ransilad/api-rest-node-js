@@ -13,4 +13,4 @@ var tvshowSchema = new Schema({
   summary:  { type: String }
 });
 
-module.exports = mongoose.model('TVShow', tvshowSchema);
+module.exports = mongoose.model('tvshow', tvshowSchema);
