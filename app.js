@@ -8,8 +8,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());  
 app.use(methodOverride());
 
-//mongodb://user:password@server:port/db
-mongoose.connect('mongodb://localhost:27017/tvshow', function(err, res) {  
+var url = ""
+switch(process.env.NODE_ENV){
+    case 'sandbox':
+    	//NODE_ENV=sandbox node app.js
+        url = "mongodb://user:password@server:port/db" 
+        break;
+    case 'production':
+    	//NODE_ENV=production node app.js
+        url = "mongodb://user:password@server:port/db" 
+        break;
+    default:
+        url = "mongodb://localhost:27017/tvshow"
+        break;
+}
+
+//
+mongoose.connect(url, function(err, res) {  
 	if(err) {
 		console.log('ERROR: connecting to Database. ' + err);
 	}
