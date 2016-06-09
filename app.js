@@ -1,30 +1,15 @@
 var express = require("express"),  
     app = express(),
     bodyParser  = require("body-parser"),
-    methodOverride = require("method-override");
-    mongoose = require('mongoose');
+    methodOverride = require("method-override"),
+    mongoose = require('mongoose'),
+    config = require('./env.json')[process.env.NODE_ENV || 'development'];
 
 app.use(bodyParser.urlencoded({ extended: false }));  
 app.use(bodyParser.json());  
 app.use(methodOverride());
 
-var url = ""
-switch(process.env.NODE_ENV){
-    case 'sandbox':
-    	//NODE_ENV=sandbox node app.js
-        url = "mongodb://user:password@server:port/db" 
-        break;
-    case 'production':
-    	//NODE_ENV=production node app.js
-        url = "mongodb://user:password@server:port/db" 
-        break;
-    default:
-        url = "mongodb://localhost:27017/tvshow"
-        break;
-}
-
-//
-mongoose.connect(url, function(err, res) {  
+mongoose.connect(config.MONGO_URI, function(err, res) {  
 	if(err) {
 		console.log('ERROR: connecting to Database. ' + err);
 	}
