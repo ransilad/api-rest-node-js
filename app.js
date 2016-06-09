@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());  
 app.use(methodOverride());
 
+//mongodb://user:password@server:port/db
 mongoose.connect('mongodb://localhost:27017/tvshow', function(err, res) {  
 	if(err) {
 		console.log('ERROR: connecting to Database. ' + err);
