@@ -41,7 +41,7 @@ api.route('/test/:id')
 	.put(TestCtrl.updateTest)
 	.delete(TestCtrl.deleteTest);
 
-app.use('/api', api);
+app.use('/api/v1', api);
 
 app.listen(3000, function() {
 	console.log("Node server running on http://localhost:3000");

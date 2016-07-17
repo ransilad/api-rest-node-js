@@ -6,7 +6,20 @@ exports.findAllTest = function(req, res) {
     Test.find(function(err, tests) {
         if(err)
             return res.status(500).send( err.message);
-        res.status(200).jsonp(tests);
+
+        console.log(tests.length);
+
+        if (tests.length == 1) {
+            console.log(tests.name)
+        } else {
+            
+            console.log(tests)
+            /*resp.each(function(err, msg){
+                console.log(msg.name)
+            });*/
+        }
+
+        res.status(200).jsonp({'resp': tests});
     });
 };
 

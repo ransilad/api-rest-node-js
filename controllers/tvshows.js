@@ -1,13 +1,38 @@
 var mongoose = require('mongoose');  
 var TVShow  = mongoose.model('tvshow');
+var Promise = require('es6-promise').Promise;
 
 //GET - Return all tvshows in the DB
 exports.findAllTVShows = function(req, res) {  
-    TVShow.find(function(err, tvshows) {
-        if(err) 
-            return res.status(500).send( err.message);
-        res.status(200).jsonp(tvshows);
+
+    function searchAll() {
+        var result = [];
+        return new Promise( function (resolve, reject) {
+            TVShow.find(function(err, tvshows) {
+                if(err) 
+                    return reject(err);
+
+                tvshows.forEach(function(item) {
+                    result.push({
+                        id: item.id,
+                        title: item.title,
+                        country: item.country
+                    });
+                });
+
+                return resolve(result);
+            });        
+        });
+    };
+
+    searchAll().then(function(result) {
+        console.log(result);
+        res.status(200).jsonp(result);
+    }).catch(function(err){
+        return res.status(500).send(err);
     });
+
+    //console.log("Paso");
 };
 
 //GET - Return a TVShow with specified ID
